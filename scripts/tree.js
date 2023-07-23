@@ -1,6 +1,6 @@
-import { node } from "./node";
+import { node } from "./node.js";
 
 // Binary search tree factory
 const tree = () => {};
 
-export default tree;
+export { tree };
