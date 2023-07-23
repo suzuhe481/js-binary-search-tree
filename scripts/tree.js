@@ -2,6 +2,7 @@ import { node } from "./node.js";
 
 // Binary search tree factory
 const tree = (array) => {
+  var root;
   var sortedArr = array.sort(function (a, b) {
     return a - b;
   });
@@ -26,8 +27,7 @@ const tree = (array) => {
 
     return root;
   };
-
-  var root = buildTree(sortedArr);
+  root = buildTree(sortedArr);
 
   // Prints a formatted binary search tree
   const prettyPrint = (node = root, prefix = "", isLeft = true) => {
@@ -43,7 +43,26 @@ const tree = (array) => {
     }
   };
 
-  return { prettyPrint };
+  // Inserts a new node into the tree.
+  const insert = (value, insertAfter = root) => {
+    var newNode = node(value);
+
+    while (insertAfter.left && insertAfter.right) {
+      if (insertAfter.value > newNode.value) {
+        insertAfter = insertAfter.left;
+      } else {
+        insertAfter = insertAfter.right;
+      }
+    }
+
+    if (insertAfter.value > newNode.value) {
+      insertAfter.left = newNode;
+    } else {
+      insertAfter.right = newNode;
+    }
+  };
+
+  return { prettyPrint, insert };
 };
 
 export { tree };
