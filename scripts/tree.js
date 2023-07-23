@@ -44,7 +44,7 @@ const tree = (array) => {
   };
 
   // Inserts a new node into the tree.
-  const insert = (value, insertAfter = root) => {
+  const insertNode = (value, insertAfter = root) => {
     var newNode = node(value);
 
     while (insertAfter.left && insertAfter.right) {
