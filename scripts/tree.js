@@ -177,7 +177,42 @@ const tree = (array) => {
     return currNode;
   };
 
-  return { prettyPrint, insertNode, deleteNode, findMin, find };
+  // Returns an array of values of the tree in level order traversal.
+  const levelOrder = () => {
+    var currNode = root;
+
+    // Return null if tree is empty
+    if (!currNode) {
+      return currNode;
+    }
+
+    // queue stores nodes waiting to be read.
+    var queue = [];
+    // levelOrderArr stores the tree values in level order traversal
+    var levelOrderArr = [];
+
+    queue.push(currNode);
+
+    // While the queue has remaining items.
+    while (queue.length !== 0) {
+      var node = queue.shift();
+
+      // Add
+      levelOrderArr.push(node.value);
+
+      // If node has any children, append them to the queue.
+      if (node.left) {
+        queue.push(node.left);
+      }
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+
+    return levelOrderArr;
+  };
+
+  return { prettyPrint, insertNode, deleteNode, findMin, find, levelOrder };
 };
 
 export { tree };
