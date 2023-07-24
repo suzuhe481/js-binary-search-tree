@@ -10,7 +10,7 @@ const tree = (array) => {
   // Creates a binary search tree with the given sorted array.
   const buildTree = (array) => {
     if (array.length <= 0) {
-      return;
+      return null;
     }
 
     var start = 0;
@@ -62,7 +62,93 @@ const tree = (array) => {
     }
   };
 
-  return { prettyPrint, insert };
+  // Deletes a node of a given value in the tree.
+  const deleteNode = (value, currNode = root) => {
+    // If empty tree
+    if (!currNode) {
+      console.log("empty tree");
+      return currNode;
+    }
+
+    // Go through tree to find the node to delete.
+    // Keep track of previous node.
+    var prevNode = root;
+    while (currNode !== null && currNode.value !== value) {
+      // Go left
+      if (currNode.value > value) {
+        prevNode = currNode;
+        currNode = currNode.left;
+        // Go right
+      } else if (currNode.value < value) {
+        prevNode = currNode;
+        currNode = currNode.right;
+      }
+    }
+
+    // If value is not in tree
+    if (!currNode) {
+      console.log("value does not exist");
+      return currNode;
+    }
+
+    // If node to delete has no children
+    if (currNode.left === null && currNode.right === null) {
+      if (prevNode.left && prevNode.left.value === value) {
+        prevNode.left = null;
+      } else if (prevNode.right && prevNode.right.value === value) {
+        prevNode.right = null;
+      }
+
+      currNode = null;
+    }
+    // // Has 1 child
+    else if (!currNode.left || !currNode.right) {
+      // Reassigns prevNode's left
+      if (prevNode.left.value === value) {
+        if (currNode.left) {
+          prevNode.left = currNode.left;
+        } else {
+          prevNode.left = currNode.right;
+        }
+      }
+      // Reassigns prevNode's right
+      else if (prevNode.right.value === value) {
+        if (currNode.left) {
+          prevNode.right = currNode.left;
+        } else {
+          prevNode.right = currNode.right;
+        }
+      }
+
+      currNode = null;
+    }
+    // Has 2 children
+    else if (currNode.left && currNode.right) {
+      var minNode = findMin(currNode.right);
+      var minValue = minNode.value;
+
+      deleteNode(minNode.value, root);
+
+      currNode.value = minValue;
+
+      currNode = null;
+    }
+
+    return root;
+  };
+
+  // Finds the minimum node of a given tree
+  const findMin = (tree = root) => {
+    var min = tree;
+
+    while (min.left) {
+      min = min.left;
+    }
+
+    return min;
+  };
+
+  return { prettyPrint, insertNode, deleteNode, findMin };
 };
 
 export { tree };
