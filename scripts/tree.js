@@ -177,7 +177,7 @@ const tree = (array) => {
     return currNode;
   };
 
-  // Returns an array of values of the tree in level order traversal.
+  // Returns an array of nodes of the tree in level order traversal.
   const levelOrder = () => {
     var currNode = root;
 
@@ -197,8 +197,8 @@ const tree = (array) => {
     while (queue.length !== 0) {
       var node = queue.shift();
 
-      // Add
-      levelOrderArr.push(node.value);
+      // Adds current node
+      levelOrderArr.push(node);
 
       // If node has any children, append them to the queue.
       if (node.left) {
