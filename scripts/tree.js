@@ -238,6 +238,19 @@ const tree = (array) => {
     return nodeArray;
   };
 
+  // Returns an array of nodes of the tree in postorder traversal
+  const postorder = (currNode = root, nodeArray = []) => {
+    if (!currNode) {
+      return;
+    }
+
+    postorder(currNode.left, nodeArray);
+    postorder(currNode.right, nodeArray);
+    nodeArray.push(currNode);
+
+    return nodeArray;
+  };
+
   return {
     prettyPrint,
     insertNode,
@@ -247,6 +260,7 @@ const tree = (array) => {
     levelOrder,
     inorder,
     preorder,
+    postorder,
   };
 };
 
