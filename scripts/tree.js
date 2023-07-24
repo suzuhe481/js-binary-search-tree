@@ -212,7 +212,28 @@ const tree = (array) => {
     return levelOrderArr;
   };
 
-  return { prettyPrint, insertNode, deleteNode, findMin, find, levelOrder };
+  // Returns an array of nodes of the tree in inorder traversal.
+  const inorder = (currNode = root, nodeArray = []) => {
+    if (!currNode) {
+      return currNode;
+    }
+
+    inorder(currNode.left, nodeArray);
+    nodeArray.push(currNode);
+    inorder(currNode.right, nodeArray);
+
+    return nodeArray;
+  };
+
+  return {
+    prettyPrint,
+    insertNode,
+    deleteNode,
+    findMin,
+    find,
+    levelOrder,
+    inorder,
+  };
 };
 
 export { tree };
