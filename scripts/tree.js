@@ -148,7 +148,36 @@ const tree = (array) => {
     return min;
   };
 
-  return { prettyPrint, insertNode, deleteNode, findMin };
+  // Takes a value and returns the node in the tree with that value
+  const find = (value) => {
+    var currNode = root;
+    // If empty tree
+    if (!currNode) {
+      console.log("empty tree");
+      return currNode;
+    }
+
+    // Iterate through tree until node with the value is found.
+    while (currNode !== null && currNode.value !== value) {
+      // Go left
+      if (currNode.value > value) {
+        currNode = currNode.left;
+        // Go right
+      } else if (currNode.value < value) {
+        currNode = currNode.right;
+      }
+    }
+
+    // If value is not in tree
+    if (!currNode) {
+      console.log("value does not exist");
+      return currNode;
+    }
+
+    return currNode;
+  };
+
+  return { prettyPrint, insertNode, deleteNode, findMin, find };
 };
 
 export { tree };
