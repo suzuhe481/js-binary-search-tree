@@ -277,6 +277,43 @@ const tree = (array) => {
     return Math.max(treeHeight(currNode.left), treeHeight(currNode.right)) + 1;
   };
 
+  // Accepts a node or value and returns it's depth.
+  // Depth is the distance from the node and the tree's root node.
+  const depth = (nodeValue = root) => {
+    var findNode;
+    // If value was passed, find it's node.
+    if (Number.isInteger(nodeValue)) {
+      findNode = find(nodeValue);
+    } else {
+      findNode = nodeValue;
+    }
+
+    // If node does not exist in tree.
+    if (findNode === null) {
+      return null;
+    }
+
+    var depth = 0;
+    var currNode = root;
+
+    // Start from the root, find the given value while counting the depth.
+    while (findNode.value !== currNode.value) {
+      if (currNode.value > findNode.value) {
+        currNode = currNode.left;
+      } else if (currNode.value < findNode.value) {
+        currNode = currNode.right;
+      }
+
+      if (currNode === null) {
+        return null;
+      }
+
+      depth += 1;
+    }
+
+    return depth;
+  };
+
   return {
     prettyPrint,
     insertNode,
@@ -288,6 +325,7 @@ const tree = (array) => {
     preorder,
     postorder,
     height,
+    depth,
   };
 };
 
