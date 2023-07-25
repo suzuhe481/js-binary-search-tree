@@ -331,6 +331,26 @@ const tree = (array) => {
     return depth;
   };
 
+  // Returns true if the tree is balanced.
+  const isBalanced = (currNode = root) => {
+    if (currNode === null) {
+      return true;
+    }
+
+    var leftHeight = height(currNode.left);
+    var rightHeight = height(currNode.right);
+
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      isBalanced(currNode.left) === true &&
+      isBalanced(currNode.right) === true
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
   return {
     prettyPrint,
     insertNode,
@@ -343,6 +363,7 @@ const tree = (array) => {
     postorder,
     height,
     depth,
+    isBalanced,
   };
 };
 
