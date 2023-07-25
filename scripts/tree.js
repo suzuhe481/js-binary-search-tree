@@ -47,18 +47,27 @@ const tree = (array) => {
   const insertNode = (value, insertAfter = root) => {
     var newNode = node(value);
 
-    while (insertAfter.left && insertAfter.right) {
-      if (insertAfter.value > newNode.value) {
-        insertAfter = insertAfter.left;
-      } else {
-        insertAfter = insertAfter.right;
+    if (!insertAfter) {
+      return;
+    }
+
+    var prevNode = null;
+    var tempNode = insertAfter;
+
+    while (tempNode !== null) {
+      if (tempNode.value > value) {
+        prevNode = tempNode;
+        tempNode = tempNode.left;
+      } else if (tempNode.value < value) {
+        prevNode = tempNode;
+        tempNode = tempNode.right;
       }
     }
 
-    if (insertAfter.value > newNode.value) {
-      insertAfter.left = newNode;
+    if (prevNode.value > value) {
+      prevNode.left = newNode;
     } else {
-      insertAfter.right = newNode;
+      prevNode.right = newNode;
     }
   };
 
