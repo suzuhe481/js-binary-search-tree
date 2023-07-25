@@ -351,6 +351,24 @@ const tree = (array) => {
     return false;
   };
 
+  // Rebalanced the tree.
+  // Returns the root of the new tree.
+  const rebalance = () => {
+    // Creates a new array from inorder()
+    var newArr = inorder();
+
+    // Turns the array from an array of nodes to an array of values.
+    var valueArr = newArr.map((node) => node.value);
+
+    // Creates a Set, which can only contain unique elements.
+    // The spread operator turns it back to an array.
+    // Is then sorted.
+    var sortedUniqArr = [...new Set(valueArr)].sort();
+
+    // Creating new tree
+    root = buildTree(sortedUniqArr);
+  };
+
   return {
     prettyPrint,
     insertNode,
@@ -364,6 +382,7 @@ const tree = (array) => {
     height,
     depth,
     isBalanced,
+    rebalance,
   };
 };
 
