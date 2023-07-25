@@ -254,9 +254,17 @@ const tree = (array) => {
   // Accepts a node or value and returns it's height.
   // Height is the distance from the node to a leaf node.
   const height = (nodeValue = root) => {
+    var findNode;
     // If value was passed, find it's node.
     if (Number.isInteger(nodeValue)) {
-      var findNode = find(nodeValue);
+      findNode = find(nodeValue);
+    } else {
+      findNode = nodeValue;
+    }
+
+    // If node does not exist in tree.
+    if (findNode === null) {
+      return null;
     }
 
     // Get height of node.
