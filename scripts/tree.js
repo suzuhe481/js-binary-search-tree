@@ -251,6 +251,32 @@ const tree = (array) => {
     return nodeArray;
   };
 
+  // Accepts a node or value and returns it's height.
+  // Height is the distance from the node to a leaf node.
+  const height = (nodeValue = root) => {
+    // If value was passed, find it's node.
+    if (Number.isInteger(nodeValue)) {
+      var findNode = find(nodeValue);
+    }
+
+    // Get height of node.
+    var height = treeHeight(findNode);
+
+    return height;
+  };
+
+  // Helper function for height()
+  // Returns the height of the tree.
+  // Returns -1 if tree doesn't exist.
+  // NOTE: Returning -1 is mandatory in order to calculate the height.
+  const treeHeight = (currNode = root) => {
+    if (!currNode) {
+      return -1;
+    }
+
+    return Math.max(treeHeight(currNode.left), treeHeight(currNode.right)) + 1;
+  };
+
   return {
     prettyPrint,
     insertNode,
@@ -261,6 +287,7 @@ const tree = (array) => {
     inorder,
     preorder,
     postorder,
+    height,
   };
 };
 
